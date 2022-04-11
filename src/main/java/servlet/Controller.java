@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.actions.Command;
 import model.actions.LoginCommand;
 import model.actions.LogoutCommand;
+import model.actions.PlayGetCommand;
 import model.actions.SignUpCommand;
 import model.dao.PlayerDAO;
 import model.entity.Player;
