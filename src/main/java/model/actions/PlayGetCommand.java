@@ -8,7 +8,7 @@ import model.dao.PlayerDAO;
 
 public class PlayGetCommand implements Command{
 
-	private final String page = "/WEB-INF/play.jsp";
+	private final String page = "/play.html";
 	
 	private PlayerDAO playerDAO = new PlayerDAO();
 	
@@ -18,11 +18,11 @@ public class PlayGetCommand implements Command{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		var playerId = (int) request.getSession().getAttribute("playerId");
+		/*var playerId = (int) request.getSession().getAttribute("playerId");
 		var player = playerDAO.find(playerId);
 			
 		request.getSession().setAttribute("playerId", player.getId());	        
-        request.setAttribute("team", player.getTeam());
+        request.setAttribute("team", player.getTeam());*/
 		
 		return page;
 	 

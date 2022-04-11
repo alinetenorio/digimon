@@ -49,6 +49,7 @@ public class EditTeamPostCommand implements Command {
 				if(digimonsList.size() > 0)
 					teamService.setDigimons(team, digimonsList);
 				request.setAttribute("team", team);
+				request.setAttribute("player", player);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

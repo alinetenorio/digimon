@@ -1,32 +1,32 @@
-package model.actions.player;
+package model.actions;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.actions.Command;
+import jakarta.servlet.http.HttpSession;
 import model.dao.PlayerDAO;
-import model.entity.Player;
 
-public class EditPlayerPostCommand implements Command {
+public class GameOverCommand implements Command{
+
 	private final String page = "/WEB-INF/home.jsp";
+	
 	private PlayerDAO playerDAO = new PlayerDAO();
 	
-	public EditPlayerPostCommand() {
+	public GameOverCommand() {
 		super();
 	}
-	
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		var id = (int) request.getSession().getAttribute("playerId");
-		var name = request.getParameter("name");
-		var email = request.getParameter("email");
-		var password = request.getParameter("password");
-		
-		Player player = playerDAO.edit(id, name, email, password);
+		var playerId = (int) request.getSession().getAttribute("playerId");
+		var player = playerDAO.find(playerId);
 		
 		request.setAttribute("team", player.getTeam());
 		request.setAttribute("player", player);
 		
 		return page;
+	 
 	}
 
 }
+

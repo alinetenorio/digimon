@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.actions.Command;
+import model.actions.GameOverCommand;
+import model.actions.GameWinCommand;
 import model.actions.LoginCommand;
 import model.actions.LogoutCommand;
 import model.actions.PlayGetCommand;
@@ -47,7 +49,7 @@ public class Controller extends HttpServlet {
 		
 		request.getRequestDispatcher(page).forward(request, response);
 	  } 
-
+	  
   }
 
 
@@ -76,5 +78,19 @@ public class Controller extends HttpServlet {
     if( action.contains("team") ) {
     	new TeamServlet().doPost(request, response);
     }
+    
+    if( action.equals("gamewin") ) {    	
+    	Command command = new GameWinCommand();
+		var page = command.execute(request, response);
+		
+		request.getRequestDispatcher(page).forward(request, response);
+	}
+    
+    if( action.equals("gameover") ) {    	
+    	Command command = new GameOverCommand();
+		var page = command.execute(request, response);
+		
+		request.getRequestDispatcher(page).forward(request, response);
+	}
   }
 }

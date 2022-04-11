@@ -22,12 +22,14 @@
 			}
 		}
 		
-		int playerId = (Integer) session.getAttribute("playerId");
+		Player player = (Player) request.getAttribute("player");
 		Team team = (Team) request.getAttribute("team");
 	%>
 	
 	<h1>Home</h1>
 	<h3>Login Success</h3>
+	
+	<span>Pontos: <%= player.getPoints() %></span>
 	
 	<%
 		if(team != null) {
@@ -41,7 +43,7 @@
 	<% 		} %>
 	<% 	} %>
 	
-	<button><a href="app?action=play">Jogar</a></button>
+	<button><a href="logged/play.html">Jogar</a></button>
 	<button><a href="app?action=logout">Logout</a></button>
 	<button><a href="app?action=editteam">Editar</button>
 	<button><a href="app?action=editplayer">Perfil</button>

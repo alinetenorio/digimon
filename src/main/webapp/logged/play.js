@@ -20,7 +20,7 @@ class Player {
     this.opacity = 1;
 
     const image = new Image();
-    image.src = './img/player.png';
+    image.src = './player.png';
     image.onload = () => {
       console.log('image load player');
       const scale = 0.1;
@@ -120,7 +120,7 @@ class Enemy {
     }
 
     const image = new Image();
-    image.src = './img/enemy.png';
+    image.src = './enemy.png';
     image.onload = () => {
       console.log('image load enemy');
       const scale = 1;
@@ -273,6 +273,8 @@ function animate() {
         setTimeout(() => {
           game.active = false
         }, 2000);
+         let gameover = document.getElementById("over").click();
+         gameover.value = true;
     }
   });
 
@@ -318,6 +320,8 @@ function animate() {
                   grid.position.x = firstEnemy.position.x;
                 } else {
                   grids.splice(gridIndex, 1)
+                  let gameover = document.getElementById("win").click();
+                  gameover.value = true;
                 }
               }
             }, 0);

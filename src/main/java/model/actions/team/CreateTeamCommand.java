@@ -42,6 +42,7 @@ public class CreateTeamCommand implements Command {
 			try {
 				Team team = teamService.createTeam(name, player, digimonsList);
 				request.setAttribute("team", team);
+				request.setAttribute("player", player);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

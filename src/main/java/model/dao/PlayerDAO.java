@@ -22,6 +22,14 @@ public class PlayerDAO {
         return player;
 	}
 	
+	public void addPoints(Player player) {
+		player.setPoints(player.getPoints() + 100);
+		
+		this.entityManager.getTransaction().begin();
+		this.entityManager.merge(player);
+		this.entityManager.getTransaction().commit();
+	}
+	
 	public Player checkPassword(String email, String password) {
 		
 		Player player = null;
