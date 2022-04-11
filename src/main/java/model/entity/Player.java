@@ -11,7 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "player")
@@ -33,14 +37,15 @@ public class Player {
 	@Column
 	private double points;
 	
-	@OneToMany(mappedBy="player")
-	private List<Team> teams;
+	@OnDelete( action = OnDeleteAction.CASCADE )
+	@OneToOne(mappedBy="player")
+	private Team team;
 	
 	public Player(String name, String email) {
 		this.name = name;
 		this.email = email;
 		this.points = 0;
-		this.teams = new ArrayList<>();
+		this.team = null;
 	}
 	
 	public Player(String name, String email, String password) {
@@ -48,7 +53,7 @@ public class Player {
 		this.email = email;
 		this.password = password;
 		this.points = 0;
-		this.teams = new ArrayList<>();
+		this.team = null;
 	}
 	
 	public Player() {}
@@ -93,8 +98,8 @@ public class Player {
 		this.points = points;
 	}
 
-	public List<Team> getTeams() {
-		return teams;
+	public Team getTeam() {
+		return team;
 	}
 
 	@Override

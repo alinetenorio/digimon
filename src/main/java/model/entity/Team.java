@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,7 +26,10 @@ public class Team {
 	@Column
 	private String name;
 	
-	@ManyToOne
+	@Column
+	private String image;
+	
+	@OneToOne
     @JoinColumn(name="player_id", nullable=false)
 	private Player player;
 	
@@ -37,9 +41,11 @@ public class Team {
 	)
 	private List<Digimon> digimons;
 	
-	public Team(String name) {
+	public Team(String name, Player player) {
 		this.name = name;
-		this.digimons = new ArrayList<>();
+		this.player = player;
+		this.digimons = new ArrayList<>();		
+		this.image = "https://i.pinimg.com/564x/59/b2/43/59b243e179f083e8d6420bd4b8816498.jpg";
 	}
 	
 	public Team() {}
@@ -60,7 +66,15 @@ public class Team {
     this.name = name;
   }
 
-  public List<Digimon> getDigimons() {
+  public String getImage() {
+	return image;
+  }
+	
+  public void setImage(String image) {
+	this.image = image;
+  }
+
+public List<Digimon> getDigimons() {
     return digimons;
   }
 

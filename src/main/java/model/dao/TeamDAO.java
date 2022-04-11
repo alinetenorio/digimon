@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import model.entity.Digimon;
 import model.entity.Player;
 import model.entity.Team;
+import model.entity.TeamDigimon;
 
 public class TeamDAO {
 	private EntityManager entityManager;
@@ -26,11 +27,12 @@ public class TeamDAO {
 		return team;
 	}
 	
-	public void insert(Team team) {
+	public Team insert(Team team) {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.persist(team);
 		this.entityManager.getTransaction().commit();
-		Connection.closeConnection();
+		//Connection.closeConnection();
+		return team;
 	}
 	
 	public void remove(int id) {
@@ -41,50 +43,54 @@ public class TeamDAO {
 		//Connection.closeConnection();
 	}
 	
-	public void edit(int id, String name) {
-		Team team = new Team();
-		team.setId(id);
+	public Team edit(int id, String name) {
+		Team team = find(id);
 		team.setName(name);
 	
 		this.entityManager.getTransaction().begin();
 		this.entityManager.merge(team);
 		this.entityManager.getTransaction().commit();
 		
-		Connection.closeConnection();
+		return team;
 	}
 	
-	public void setDigimons(Team team) {
-		removeTeamDigimon(team.getId());	
-		for(Digimon d : team.getDigimons()) {
-			addTeamDigimon(team.getId(), d.getId());
-		}		
-	}
-	
-	public void removeTeamDigimon(int teamId) {
+	public void removeTeamDigimon(int teamId, int digimonId) {
 		
 		try {			
-			Query query = this.entityManager.createQuery("DELETE FROM team_digimon WHERE team_id = :teamId");
-			query.setParameter("teamId", teamId);			
+			this.entityManager.getTransaction().begin();
 			
-			query.executeUpdate();			
+			Query query = this.entityManager.createQuery("DELETE FROM TeamDigimon WHERE"
+					+ " team_id = :teamId and digimon_id = :digimonId");
+			query.setParameter("teamId", teamId);
+			query.setParameter("digimonId", digimonId);
+			
+			query.executeUpdate();		
+			
+			this.entityManager.getTransaction().commit();
 		} catch (NoResultException e) {
 			e.printStackTrace();
+			this.entityManager.getTransaction().rollback();
 		} finally {
 			//Connection.closeConnection();
 		}
         
 	}
 	
-	public void addTeamDigimon(int teamId, int digimonId) {
-		
+	public void addTeamDigimon(Team team, Digimon digimon, int level) {
+		TeamDigimon teamDigimon = new TeamDigimon(team, digimon, level);
 		try {			
-			Query query = this.entityManager.createQuery("INSERT INTO team_digimon VALUES(:teamId, :digimonId");
-			query.setParameter("teamId", teamId);			
-			query.setParameter("digimonId", digimonId);			
-			
-			query.executeUpdate();			
+			try {
+				this.entityManager.getTransaction().begin();
+				this.entityManager.persist(teamDigimon);								
+				this.entityManager.getTransaction().commit();
+				//Connection.closeConnection();
+			} catch (Exception e) {
+				e.printStackTrace();
+				this.entityManager.getTransaction().rollback();
+			}
 		} catch (NoResultException e) {
 			e.printStackTrace();
+			this.entityManager.getTransaction().rollback();
 		} finally {
 			//Connection.closeConnection();
 		}

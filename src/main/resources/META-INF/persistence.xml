@@ -8,7 +8,11 @@
     	<class>model.entity.Digimon</class>
     	<class>model.entity.Player</class>
     	<class>model.entity.Team</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    	<class>model.entity.TeamDigimon</class>
+    	<class>model.entity.TeamDigimonKey</class>
+    	
+    	<exclude-unlisted-classes>false</exclude-unlisted-classes>
+        
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/digimon?useTimezone=true&amp;serverTimezone=UTC" />
             <property name="javax.persistence.jdbc.user" value="root" />

@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.actions.Command;
 import model.actions.LoginCommand;
+import model.actions.LogoutCommand;
 import model.actions.SignUpCommand;
 import model.dao.PlayerDAO;
 import model.entity.Player;
@@ -22,19 +23,29 @@ public class Controller extends HttpServlet {
 	
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    var action = request.getParameter("action");
+	  var action = request.getParameter("action").toLowerCase();
 
-    if( action.contains("player") ) {
-      new PlayerServlet().doGet(request, response);
-    } else if( action.contains("digimon") ) {
-    //  new DigimonServlet().doGet(request, response);
-    }
-    
-    System.out.println("aqui");
-
-    //service
-    //dao
-    //command
+	  if( action.contains("team") ) {    	
+		  new TeamServlet().doGet(request, response);
+	  } 
+	  
+	  if( action.contains("player") ) {    	
+		  new PlayerServlet().doGet(request, response);
+	  } 
+	  
+	  if( action.equals("logout") ) {    	
+    	Command command = new LogoutCommand();
+		var page = command.execute(request, response);
+		
+		request.getRequestDispatcher(page).forward(request, response);
+	  } 
+	  
+	  if( action.equals("play") ) {    	
+    	Command command = new PlayGetCommand();
+		var page = command.execute(request, response);
+		
+		request.getRequestDispatcher(page).forward(request, response);
+	  } 
 
   }
 
@@ -59,6 +70,10 @@ public class Controller extends HttpServlet {
     
     if( action.contains("player") ) {
     	new PlayerServlet().doPost(request, response);
+    }
+    
+    if( action.contains("team") ) {
+    	new TeamServlet().doPost(request, response);
     }
   }
 }

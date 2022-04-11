@@ -1,35 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="model.entity.Player"%>
+<%@ page import="model.entity.Team"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Home</title>
+	<meta charset="ISO-8859-1">
+	<title>Home</title>
 </head>
 <body>
-<h1>Home</h1>
-<table border="1">
-<thead>
-<tr>
-<td>Nome</td>
-<%
-Player player = (Player)request.getAttribute("player");
-%>
-<td colspan="2" style="text-align:center"><%= player != null ? player.getName() : "" %></td>
-</tr>
-</thead>
 
-<tr>
-<td>
-<%= player != null ? player.getName() : "" %>
-</td>
-<td> <a href="app?acao=editar&produto=<%= player != null ? player.getName() : "vazio" %>">Editar</a></td>
-<td><a href="app?acao=remover&produto=<%= player != null ? player.getName() : "vazio" %>">Remover</a></td>
-</tr>
-
-</tbody>
-</table>
+	<%
+		String message = null;
+		String sessionID = null;
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null){
+			for(Cookie cookie : cookies){
+				if(cookie.getName().equals("message")) message = cookie.getValue();
+				if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+			}
+		}
+		
+		int playerId = (Integer) session.getAttribute("playerId");
+		Team team = (Team) request.getAttribute("team");
+	%>
+	
+	<h1>Home</h1>
+	<h3>Login Success</h3>
+	
+	<%
+		if(team != null) {
+	%>	
+			<img src="<%= team.getImage() == null ? "https://i.pinimg.com/564x/59/b2/43/59b243e179f083e8d6420bd4b8816498.jpg" : team.getImage() %>" alt="Imagem do time" ></img>
+			<span>Time: <%= team.getName() %></span>
+	<%
+			for(int i = 0; i < team.getDigimons().size(); i++) {
+	%>
+				<span>Digimon <%= i %>: <%= team.getDigimons().get(i).getName() %></span>
+	<% 		} %>
+	<% 	} %>
+	
+	<button><a href="app?action=play">Jogar</a></button>
+	<button><a href="app?action=logout">Logout</a></button>
+	<button><a href="app?action=editteam">Editar</button>
+	<button><a href="app?action=editplayer">Perfil</button>
+		
 </body>
 </html>

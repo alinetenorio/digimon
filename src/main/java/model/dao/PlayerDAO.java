@@ -4,6 +4,7 @@ import database.Connection;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import model.entity.Player;
 
@@ -33,18 +34,23 @@ public class PlayerDAO {
 			player = (Player) query.getSingleResult();			
 		} catch (NoResultException e) {
 			e.printStackTrace();
-		} finally {
-			Connection.closeConnection();
 		}
         
         return player;
 	}
 	
-	public void insert(Player player) {
-		this.entityManager.getTransaction().begin();
-		this.entityManager.persist(player);
-		this.entityManager.getTransaction().commit();
-		//Connection.closeConnection();
+	public Player insert(Player player) {
+		try {
+			this.entityManager.getTransaction().begin();
+			this.entityManager.persist(player);
+			this.entityManager.getTransaction().commit();
+			return player;
+			//Connection.closeConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.entityManager.getTransaction().rollback();
+			return null;
+		}
 	}
 	
 	public void remove(int id) {
@@ -55,9 +61,8 @@ public class PlayerDAO {
 		//Connection.closeConnection();
 	}
 	
-	public void edit(int id, String name, String email, String password) {
-		Player player = new Player();
-		player.setId(id);
+	public Player edit(int id, String name, String email, String password) {
+		Player player = find(id);
 		player.setName(name);
 		player.setEmail(email);
 		player.setPassword(password);
@@ -66,7 +71,7 @@ public class PlayerDAO {
 		this.entityManager.merge(player);
 		this.entityManager.getTransaction().commit();
 		
-		//Connection.closeConnection();
+		return player;
 	}
 	
 }

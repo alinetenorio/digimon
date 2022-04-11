@@ -2,8 +2,10 @@ package model.actions;
 
 import java.util.List;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.dao.DigimonDAO;
 import model.dao.PlayerDAO;
 import model.entity.Digimon;
@@ -24,9 +26,20 @@ public class SignUpCommand implements Command {
 		var email = request.getParameter("email");
 		var password = request.getParameter("password");
 		
-		playerDAO.insert(new Player(name, email, password));
-		
+		Player player = playerDAO.insert(new Player(name, email, password));		
 		listAllDigimons(request, response);
+		
+		if(player != null) {			
+			HttpSession oldSession = request.getSession(false);
+	        if (oldSession != null) {
+	            oldSession.invalidate();
+	        }
+	  
+	        HttpSession session = request.getSession(true);	
+	        session.setMaxInactiveInterval(0);
+	        session.setAttribute("playerId", player.getId());
+		}
+		
 		
 		return page;
 	}

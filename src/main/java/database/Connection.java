@@ -19,9 +19,4 @@ public class Connection {
 		return entityManager;
 	}
 	
-	public static void closeConnection() {
-		entityManager.close();
-		entityManagerFactory.close();
-	}
-	
 }

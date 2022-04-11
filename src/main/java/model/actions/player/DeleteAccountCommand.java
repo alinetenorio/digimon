@@ -1,12 +1,13 @@
-package model.actions;
+package model.actions.player;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.actions.Command;
 import model.dao.PlayerDAO;
 import model.entity.Player;
 
 public class DeleteAccountCommand implements Command {
-	private final String page = "/index.html";
+	private final String page = "/login.html";
 	private PlayerDAO playerDAO = new PlayerDAO();
 	
 	public DeleteAccountCommand() {
@@ -15,9 +16,9 @@ public class DeleteAccountCommand implements Command {
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		var id = request.getParameter("id");
+		var playerId = (int) request.getSession().getAttribute("playerId");
 		
-		playerDAO.remove(Integer.parseInt(id));
+		playerDAO.remove(playerId);
 		
 		return page;
 	}
