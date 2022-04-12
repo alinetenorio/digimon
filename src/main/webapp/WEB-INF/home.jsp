@@ -17,24 +17,17 @@
 		<div id="nav-placeholder"></div>
 		<%
 			String userName = null;
-			String sessionID = null;
 			
 			Cookie[] cookies = request.getCookies();
 			if(cookies != null){
 				for(Cookie cookie : cookies){
 					if(cookie.getName().equals("userName")) userName = cookie.getValue();
-					if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
 				}
 			}
 			
 			Player player = (Player) request.getAttribute("player");
 			Team team = (Team) request.getAttribute("team");
-		%>
-		
-		<%
-			if(team != null) {
-		%>	
-			
+		%>			
 			
 			<div class="album py-5 bg-light">
 	        <div class="container">	
@@ -42,39 +35,47 @@
 	        <h2>Pontos: <%= player.getPoints() %></h2>
 	        <h2>Time: <%= team.getName() %></h2>
 	        	<div class="row">
-		<%
-				for(int i = 0; i < team.getDigimons().size(); i++) {
-		%>
-					<div class="col-md-4">
+		
+					<div class="col-md-3">
 		              <div class="card mb-4 box-shadow">
-		                <img class="card-img-top" src="<%= team.getDigimons().get(i).getImage() %>" alt="Card image cap">
+		                <img class="card-img-top" src="img/invaders.png" alt="Card image cap">
 		                <div class="card-body">
-		                  <p class="card-text text-center"> <%= team.getDigimons().get(i).getName() %> </p>	        
+		                  <p class="card-text text-center"> <a href="app?action=selectTeam" class="btn button">Jogar</a> </p>	        
 		                </div>
 		              </div>
-		            </div>
-				
-		<% 		} %>
+		            </div>	
+		            
+		          	  <div class="col-md-3">
+		              <div class="card mb-4 box-shadow">
+		                <img class="card-img-top" src="img/digimons.jpg" alt="Card image cap">
+		                <div class="card-body">
+		                  <p class="card-text text-center"> <a href="app?action=editteam" class="btn button">Time</a> </p>	        
+		                </div>
+		              </div>
+		            </div>	
+		            
+		            <div class="col-md-3">
+		              <div class="card mb-4 box-shadow">
+		                <img class="card-img-top" src="img/perfil.jpg" alt="Card image cap">
+		                <div class="card-body">
+		                  <p class="card-text text-center"> <a href="app?action=editplayer" class="btn button">Perfil</a> </p>	        
+		                </div>
+		              </div>
+		            </div>	
+		            
+		            <div class="col-md-3">
+		              <div class="card mb-4 box-shadow">
+		                <img class="card-img-top" src="img/bye.jpg" alt="Card image cap">
+		                <div class="card-body">
+		                  <p class="card-text text-center"> <a href="app?action=logout" class="btn button">Logout</a> </p>	        
+		                </div>
+		              </div>
+		            </div>		
+		
 				</div>			
 	      	</div>
-		<% 	} %>
 		
-		<div class="container">
-	        <div class="row">
-	        	<div class="col-md-3">
-	        		<a href="app?action=selectTeam" class="button">Jogar</a>
-	        	</div>
-	        	<div class="col-md-3">
-	        		<a href="app?action=editteam" class="button">Time</a>
-	        	</div>
-	        	<div class="col-md-3">
-	        		<a href="app?action=editplayer" class="button">Perfil</a>
-	        	</div>
-	        	<div class="col-md-3">        		
-	        		<a href="app?action=logout" class="button">Logout</a>
-	        	</div>
-	        </div>
-	    </div>
+		
 		<script src="//code.jquery.com/jquery.min.js"></script>
 		<script>
 		$.get("menu.html", function(data){

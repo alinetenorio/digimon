@@ -62,6 +62,39 @@ class Player {
   }
 }
 
+class Particle {
+  constructor({position, velocity, radius, color, fades}) {
+    this.position = position;
+    this.velocity = velocity;
+
+    this.radius = radius;
+    this.color = color
+    this.opacity = 1
+    this.fades = fades
+  }
+
+  draw() {
+	c.save()
+	c.globalAlpha = this.opacity
+    c.beginPath();
+    c.arc(this.position.x, this.position.y, this.radius, 
+      0, Math.PI * 2);
+    
+    c.fillStyle = this.color;
+    c.fill();
+    c.closePath();
+    c.restore()
+  }
+
+  update() {
+    this.draw();
+    this.position.x += this.velocity.x;
+    this.position.y += this.velocity.y;
+    
+    if(this.fades) this.opacity -= 0.01
+  }
+}
+
 class Projectile {
   constructor({position, velocity}) {
     this.position = position;
@@ -218,6 +251,7 @@ class Grid {
 
 const grids = [new Grid()];
 const player = new Player();
+const particles = [];
 const projectiles = [];
 const enemyProjectiles = [];
 
@@ -239,13 +273,62 @@ let game = {
   active: true
 }
 
+for(let i=0;i<100;i++){
+	particles.push(new Particle({
+		position: {
+			x: Math.random() * canvas.width,
+			y: Math.random() * canvas.height
+		},
+		velocity: {
+			x: 0,
+			y: 1
+		},
+		radius: Math.random() * 3,
+		color: 'white'
+	}))
+}
+
+function createParticles({object, color, fades}) {
+	for(let i=0;i<15;i++){
+		particles.push(new Particle({
+			position: {
+				x: object.position.x + object.width/2,
+				y: object.position.y + object.height/2
+			},
+			velocity: {
+				x: (Math.random() - 0.5) * 2,
+				y: (Math.random() - 0.5) * 2
+			},
+			radius: Math.random() * 3,
+			color: color || '#BAA0DE',
+			fades: fades
+		}))
+	}
+}
+
 function animate() {
-  console.log('animate');
   if(!game.active) return
+  
   requestAnimationFrame(animate);
   c.fillStyle = 'black';
   c.fillRect(0, 0, canvas.width, canvas.height);
   player.update();
+  
+  particles.forEach((particle, index) => {
+	if(particle.position.y - particle.radius >= canvas.height) {
+		particle.position.x = Math.random() * canvas.width,
+		particle.position.y = -particle.radius
+	}
+	
+	if(particle.opacity <= 0) {
+		setTimeout(() => {
+			particles.splice(index, 1)
+		}, 0)
+	} else {
+		particle.update()
+	}
+	
+  })
   
   enemyProjectiles.forEach((enemyProjectile, index) => {
     if(enemyProjectile.position.y + enemyProjectile.radius
@@ -264,6 +347,11 @@ function animate() {
       <= player.position.x + player.width) {
         console.log("FIM - PERDEU");
 
+		createParticles({
+			object: player,
+			color: '#FA7A53'
+		})
+		
         setTimeout(() => {
           enemyProjectiles.splice(index, 1)
           player.opacity = 0
@@ -272,9 +360,10 @@ function animate() {
 
         setTimeout(() => {
           game.active = false
+          let gameover = document.getElementById("over").click();
+          gameover.value = true;
         }, 2000);
-         let gameover = document.getElementById("over").click();
-         gameover.value = true;
+         
     }
   });
 
@@ -302,6 +391,7 @@ function animate() {
           projectile.position.x - projectile.radius <=
           enemy.position.x + enemy.width && projectile.position.y +
           projectile.radius >= enemy.position.y) {
+			
             setTimeout(() => {
               const enemyFound = grid.enemies.find( 
                 enemy2 => enemy2 === enemy);
@@ -309,6 +399,11 @@ function animate() {
                 projectile2 => projectile2 === projectile);
 
               if(enemyFound && projectileFound) {
+				createParticles({
+					object: enemy,
+					fades: true
+				})
+                
                 grid.enemies.splice(i, 1);
                 projectiles.splice(j, 1);
 

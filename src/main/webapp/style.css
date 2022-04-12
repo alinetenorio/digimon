@@ -148,6 +148,10 @@ input[type=text]:placeholder, input[type=password]:placeholder {
   color: #cccccc;
 }
 
+.btn {
+	padding: 10px 30px!important;	
+	margin: 0!important;	
+}
 
 
 /* ANIMATIONS */
