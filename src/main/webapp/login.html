@@ -2,21 +2,45 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta charset="UTF-8">
-	<title>Inicio</title>
+		<meta charset="UTF-8">
+		<title>Login</title>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<link href="style.css" rel="stylesheet">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	</head>
-	<body>
-	<h1 style="margin-left: 60px">Página de Cadastro de Produtos</h1>
-	<div style="margin-left: 100px">
-	<form method="POST" action="app?action=login">
 	
-		<label for="email" >Email:</label>
-		<input id="email" name="email" type="text" style="margin-bottom: 10px; padding-bottom:10px" value=""> <br/>
-		<label for="password" >Senha:</label>
-		<input id="password" name="password" type="password" value=""/>
+	<body>
+		<div id="nav-placeholder"></div>		
 		
-		<button type="submit" style="margin-left: 100px">Login</button>
-	</form>
-	</div>
+		<div class="wrapper fadeInDown">
+		  <div id="formContent">
+		    <!-- Tabs Titles -->
+			<div class="fadeIn first">
+		      <img src="img/digivice.png" alt="User Icon" style="padding-top: 30px;" width="200" 
+		      	/>
+	    	</div>
+	    	
+			<form method="POST" action="app?action=login">							
+				<input type="text" id="email" name="email" type="text" placeholder="Email">			
+				<input id="password" name="password" type="password" value="" placeholder="Senha"/>
+				
+				<button type="submit" class="fadeIn fourth">Login</button>
+			</form>
+		
+		    <!-- Remind Passowrd -->
+		    <div id="formFooter">
+		      <a class="underlineHover" href="signup.html">Não tem conta? Faça seu cadastro</a>
+		    </div>
+		
+		  </div>
+		</div>
+		
+		<script src="//code.jquery.com/jquery.min.js"></script>
+		<script>
+		$.get("menu.html", function(data){
+		    $("#nav-placeholder").replaceWith(data);
+		});
+		</script>
 	</body>
 </html>

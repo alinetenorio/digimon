@@ -16,6 +16,8 @@ import model.actions.player.EditPlayerPostCommand;
 import model.actions.team.CreateTeamCommand;
 import model.actions.team.EditTeamGetCommand;
 import model.actions.team.EditTeamPostCommand;
+import model.actions.team.SelectTeamGetCommand;
+import model.actions.team.SelectTeamPostCommand;
 import model.entity.Player;
 
 @WebServlet("/TeamServlet")
@@ -37,6 +39,9 @@ public class TeamServlet extends HttpServlet {
 		  case "editteam":
 			executeCommand(new EditTeamGetCommand(), request, response);
 			break;
+		  case "selectteam":
+				executeCommand(new SelectTeamGetCommand(), request, response);
+				break;
 		
 	  }
 
@@ -55,7 +60,9 @@ public class TeamServlet extends HttpServlet {
 	  case "editteam":
 		executeCommand(new EditTeamPostCommand(), request, response);
 		break;
-		
+	  case "selectteam":
+			executeCommand(new SelectTeamPostCommand(), request, response);
+			break;
 	  }
   }
   

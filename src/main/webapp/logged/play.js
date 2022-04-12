@@ -1,10 +1,10 @@
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
-// canvas.width = 864;
-canvas.width = innerWidth;
-// canvas.height = 400;
-canvas.height = innerHeight;
+canvas.width = 1024;
+canvas.height = 576;
+//canvas.width = innerWidth;
+//canvas.height = innerHeight;
 
 let width;
 

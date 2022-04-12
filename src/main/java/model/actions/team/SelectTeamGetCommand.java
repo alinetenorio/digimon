@@ -15,13 +15,13 @@ import model.entity.Digimon;
 import model.entity.Player;
 import model.entity.TeamDigimon;
 
-public class EditTeamGetCommand implements Command {
-	private final String page = "/WEB-INF/team-edit.jsp";
+public class SelectTeamGetCommand implements Command {
+	private final String page = "/WEB-INF/digimon-select.jsp";
 	private TeamDAO teamDAO = new TeamDAO();
 	private PlayerDAO playerDAO = new PlayerDAO();
 	private DigimonDAO digimonDAO = new DigimonDAO();
 	
-	public EditTeamGetCommand() {
+	public SelectTeamGetCommand() {
 		super();
 	}
 	
@@ -32,23 +32,10 @@ public class EditTeamGetCommand implements Command {
 		
 		var team = player.getTeam();
 		
-		List<TeamDigimon> teamDigimons = new ArrayList<>();
-		for(Digimon d: team.getDigimons()) {
-			teamDigimons.add( teamDAO.getTeamDigimon(team.getId(), d.getId()) );
-		}
-		
 		request.setAttribute("team", team);
-		request.setAttribute("teamDigimons", teamDigimons);
-		
-		listAllDigimons(request, response);
 		
 		return page;
 	}
 	
-	public void listAllDigimons(HttpServletRequest request, HttpServletResponse response) {
-		digimonDAO = new DigimonDAO();
-		List<Digimon> digimons = digimonDAO.findAll();
-		request.setAttribute("digimons", digimons);
-	}
 
 }

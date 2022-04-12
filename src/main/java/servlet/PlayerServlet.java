@@ -40,11 +40,6 @@ public class PlayerServlet extends HttpServlet {
 		 
 	  }
     
-
-    //service
-    //dao
-    //command
-
   }
 
 

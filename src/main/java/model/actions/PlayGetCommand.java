@@ -8,7 +8,7 @@ import model.dao.PlayerDAO;
 
 public class PlayGetCommand implements Command{
 
-	private final String page = "/play.html";
+	private final String page = "/play.jsp";
 	
 	private PlayerDAO playerDAO = new PlayerDAO();
 	

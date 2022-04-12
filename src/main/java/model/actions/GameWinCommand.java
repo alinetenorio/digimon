@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.dao.PlayerDAO;
 import model.service.PlayerService;
+import model.service.TeamService;
 
 public class GameWinCommand implements Command{
 
@@ -13,6 +14,7 @@ public class GameWinCommand implements Command{
 	
 	private PlayerDAO playerDAO = new PlayerDAO();
 	private PlayerService playerService = new PlayerService();
+	private TeamService teamService = new TeamService();
 	
 	public GameWinCommand() {
 		super();
@@ -23,6 +25,9 @@ public class GameWinCommand implements Command{
 		var playerId = (int) request.getSession().getAttribute("playerId");
 		var player = playerDAO.find(playerId);
 		
+		var digimonId = Integer.parseInt((String)request.getParameter("digimonId"));
+		
+		teamService.nextLevel(player, digimonId);
 		playerService.addPoints(player);
 
 		request.setAttribute("team", player.getTeam());

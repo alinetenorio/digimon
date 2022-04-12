@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.actions.Command;
 import model.actions.GameOverCommand;
 import model.actions.GameWinCommand;
+import model.actions.HomeGetCommand;
 import model.actions.LoginCommand;
 import model.actions.LogoutCommand;
 import model.actions.PlayGetCommand;
@@ -27,7 +28,7 @@ public class Controller extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	  var action = request.getParameter("action").toLowerCase();
-
+	  
 	  if( action.contains("team") ) {    	
 		  new TeamServlet().doGet(request, response);
 	  } 
@@ -45,6 +46,13 @@ public class Controller extends HttpServlet {
 	  
 	  if( action.equals("play") ) {    	
     	Command command = new PlayGetCommand();
+		var page = command.execute(request, response);
+		
+		request.getRequestDispatcher(page).forward(request, response);
+	  } 
+	  
+	  if( action.equals("home") ) {    	
+    	Command command = new HomeGetCommand();
 		var page = command.execute(request, response);
 		
 		request.getRequestDispatcher(page).forward(request, response);

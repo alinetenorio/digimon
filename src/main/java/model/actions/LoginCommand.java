@@ -37,10 +37,8 @@ public class LoginCommand implements Command{
 	        request.setAttribute("team", player.getTeam());
 	        request.setAttribute("player", player);
 	
-	        Cookie message = new Cookie("message", "Welcome");
-	        //message.setSecure(true);
-	        //message.setHttpOnly(true);
-	        response.addCookie(message);
+	        Cookie userName = new Cookie("userName", player.getName());
+	        response.addCookie(userName);
 			
 			return pageAllowed;
 		} else {

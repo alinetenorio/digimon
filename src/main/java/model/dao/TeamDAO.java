@@ -12,6 +12,7 @@ import model.entity.Digimon;
 import model.entity.Player;
 import model.entity.Team;
 import model.entity.TeamDigimon;
+import model.entity.TeamDigimonKey;
 
 public class TeamDAO {
 	private EntityManager entityManager;
@@ -95,5 +96,18 @@ public class TeamDAO {
 			//Connection.closeConnection();
 		}
         
+	}
+	
+	public TeamDigimon getTeamDigimon(int teamId, int digimonId) {
+		return this.entityManager.find(TeamDigimon.class, new TeamDigimonKey(teamId, digimonId));		
+	}
+	
+	public void nextLevel(int teamId, int digimonId) {
+		TeamDigimon td = this.entityManager.find(TeamDigimon.class, new TeamDigimonKey(teamId, digimonId));	
+		td.setLevel(td.getLevel()+1);
+		
+		this.entityManager.getTransaction().begin();
+		this.entityManager.merge(td);
+		this.entityManager.getTransaction().commit();
 	}
 }

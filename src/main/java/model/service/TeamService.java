@@ -1,5 +1,6 @@
 package model.service;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -29,11 +30,11 @@ public class TeamService {
 	}
 	
 	public void setDigimons(Team team, List<Integer> digimonIds) {
-		for(Digimon d : team.getDigimons()) {
-			
+		for(Iterator<Digimon> it = team.getDigimons().iterator(); it.hasNext();) {
+			Digimon d = it.next();
 			if(!digimonIds.contains(d.getId())) {				
 				teamDAO.removeTeamDigimon(team.getId(), d.getId());
-				team.getDigimons().remove(d);
+				it.remove();
 			} else {				
 				digimonIds.remove((Object)d.getId());
 			}
@@ -46,5 +47,9 @@ public class TeamService {
 			team.getDigimons().add(digimon);
 		}
 		
+	}
+	
+	public void nextLevel(Player player, int digimonId) {
+		teamDAO.nextLevel(player.getTeam().getId(), digimonId);
 	}
 }
