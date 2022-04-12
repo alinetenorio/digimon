@@ -25,7 +25,7 @@
 		
 		<input type="hidden" name="team-id" value="<%= team.getId() %>"/>
 				
-		<div class="album py-5 bg-light">
+		<div class="album py-5 bg-light bg-transparent">
 	        <div class="container">
 				<h2>Time: <%= team.getName() %></h2></br>
 				<h2>Escolha um Digimon do seu time para jogar:</h2>

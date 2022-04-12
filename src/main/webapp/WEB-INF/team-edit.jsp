@@ -24,9 +24,9 @@
 				Team team = (Team) request.getAttribute("team");
 				ArrayList<TeamDigimon> teamDigimons = (ArrayList) request.getAttribute("teamDigimons");
 			%>				
-			<div class="album py-5 bg-light">		   
+			<div class="album py-3 bg-transparent">		   
 				<div class="container">
-					<label for="team-name" >Nome do time:</label>
+					<h2>Nome do time:</h2>
 					<input id="team-name" name="team-name" type="text" style="background-color:white;margin-bottom: 10px; padding-bottom:10px" 
 						value="<%= team.getName() %>"/> 
 					<input type="hidden" name="team-id" value="<%= team.getId() %>"/>	
@@ -51,20 +51,21 @@
 			              	           
 			                <img class="card-img-top" src="<%= digimon.getImage() %>" alt="Card image cap">
 			                <div class="card-body">
-			                  <p class="card-text text-center"> <%= digimon.getName() %> </p>	        
-			                </div>
+			                  <p class="card-text text-center font-white"> <%= digimon.getName() %> </p>	
+			                  <p class="font-white">Nível:
+								<%
+								 	boolean myDigimon = false;
+								 	for(TeamDigimon td : teamDigimons) {
+								 		if(td.getId().getDigimonId() == digimon.getId()) {
+								 			out.print(td.getLevel());
+								 			myDigimon = true;
+								 		}							 		
+								 	}
+								 	if(!myDigimon) out.print(0);
+								 %>	
+								</p>        
+			                </div>							
 							
-							Nível:
-							<%
-							 	boolean myDigimon = false;
-							 	for(TeamDigimon td : teamDigimons) {
-							 		if(td.getId().getDigimonId() == digimon.getId()) {
-							 			out.print(td.getLevel());
-							 			myDigimon = true;
-							 		}							 		
-							 	}
-							 	if(!myDigimon) out.print(0);
-							 %>	
 			              </div>
 			            </div>			
 				<%	} %>
@@ -88,9 +89,9 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 		<script src="//code.jquery.com/jquery.min.js"></script>
 		<script>
-		$.get("menu.html", function(data){
-		    $("#nav-placeholder").replaceWith(data);
-		});
+			$.get("menu.html", function(data){
+			    $("#nav-placeholder").replaceWith(data);
+			});
 		</script>
 	</body>
 </html>

@@ -38,6 +38,9 @@ public class SignUpCommand implements Command {
 	        HttpSession session = request.getSession(true);	
 	        session.setMaxInactiveInterval(0);
 	        session.setAttribute("playerId", player.getId());
+	        
+	        Cookie userName = new Cookie("userName", player.getName());
+	        response.addCookie(userName);
 		}
 		
 		

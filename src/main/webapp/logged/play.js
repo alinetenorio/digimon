@@ -108,7 +108,7 @@ class Projectile {
     c.arc(this.position.x, this.position.y, this.radius, 
       0, Math.PI * 2);
     
-    c.fillStyle = 'red';
+    c.fillStyle = 'blue';
     c.fill();
     c.closePath();
   }
@@ -133,7 +133,7 @@ class EnemyProjectile {
     c.arc(this.position.x, this.position.y, this.radius, 
       0, Math.PI * 2);
     
-    c.fillStyle = 'blue';
+    c.fillStyle = 'red';
     c.fill();
     c.closePath();
   }

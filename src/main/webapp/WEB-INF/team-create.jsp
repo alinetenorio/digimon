@@ -18,9 +18,9 @@
 		<div id="nav-placeholder"></div>
 		
 		<form method="POST" action="app?action=createTeam">
-			<div class="album py-5 bg-light">		   
+			<div class="album py-5 bg-transparent">		   
 				<div class="container">
-					<label for="team-name" >Nome do time:</label>
+					<h2>Nome do time:</h2>
 					<input id="team-name" name="team-name" type="text" style="background-color:white;margin-bottom: 10px; padding-bottom:10px" 
 						value=""/> 					
 	        		<div class="row">
@@ -36,7 +36,7 @@
 								 name="selected-digimons" value="<%= digimon.getId() %>">
 							<img class="card-img-top" src="<%= digimon.getImage() %>" alt="Card image cap">
 		            	    <div class="card-body">
-			                  <p class="card-text text-center"> <%= digimon.getName() %> </p>	        
+			                  <p class="card-text text-center font-white"> <%= digimon.getName() %> </p>	        
 			                </div>
 		                 </div>
 		            </div>	
@@ -49,10 +49,15 @@
 	      		</div>			
 	      	</div>      	
 	      </div>		
-		
 			
 		</form>
 		
+		<script type="text/javascript">
+			function check(el) {
+				var checkbox = el.firstChild.nextElementSibling;
+				checkbox.checked = checkbox.checked ? false : true;
+			}
+		</script>
 		<script src="//code.jquery.com/jquery.min.js"></script>
 		<script>
 		$.get("menu.html", function(data){

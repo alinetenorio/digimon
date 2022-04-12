@@ -30,6 +30,7 @@ public class TeamService {
 	}
 	
 	public void setDigimons(Team team, List<Integer> digimonIds) {
+		System.out.println("Criando time. digimonIds.size: " + digimonIds.size());
 		for(Iterator<Digimon> it = team.getDigimons().iterator(); it.hasNext();) {
 			Digimon d = it.next();
 			if(!digimonIds.contains(d.getId())) {				

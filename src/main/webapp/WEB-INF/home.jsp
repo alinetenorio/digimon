@@ -29,7 +29,7 @@
 			Team team = (Team) request.getAttribute("team");
 		%>			
 			
-			<div class="album py-5 bg-light">
+			<div class="album py-3 bg-light bg-transparent">
 	        <div class="container">	
 	        <h2>Olá <%= userName != null ? userName : "" %> !</h2></br>
 	        <h2>Pontos: <%= player.getPoints() %></h2>
@@ -38,37 +38,45 @@
 		
 					<div class="col-md-3">
 		              <div class="card mb-4 box-shadow">
-		                <img class="card-img-top" src="img/invaders.png" alt="Card image cap">
-		                <div class="card-body">
-		                  <p class="card-text text-center"> <a href="app?action=selectTeam" class="btn button">Jogar</a> </p>	        
-		                </div>
+			             <a href="app?action=selectTeam" class="font-white">
+			                <img class="card-img-top" src="img/invaders.png" alt="Card image cap">
+			                <div class="card-body">
+			                  <p class="card-text text-center"> Jogar </p>	        
+			                </div>
+		                </a>
 		              </div>
 		            </div>	
 		            
 		          	  <div class="col-md-3">
 		              <div class="card mb-4 box-shadow">
-		                <img class="card-img-top" src="img/digimons.jpg" alt="Card image cap">
-		                <div class="card-body">
-		                  <p class="card-text text-center"> <a href="app?action=editteam" class="btn button">Time</a> </p>	        
-		                </div>
+			             <a href="app?action=editteam" class="font-white">
+			                <img class="card-img-top" src="img/digimons.jpg" alt="Card image cap">
+			                <div class="card-body">
+			                  <p class="card-text text-center">Time </p>	        
+			                </div>
+		                </a>
 		              </div>
 		            </div>	
 		            
 		            <div class="col-md-3">
 		              <div class="card mb-4 box-shadow">
-		                <img class="card-img-top" src="img/perfil.jpg" alt="Card image cap">
-		                <div class="card-body">
-		                  <p class="card-text text-center"> <a href="app?action=editplayer" class="btn button">Perfil</a> </p>	        
-		                </div>
+		              	<a href="app?action=editplayer" class="font-white">
+			                <img class="card-img-top" src="img/perfil.jpg" alt="Card image cap">
+			                <div class="card-body">
+			                  <p class="card-text text-center">Perfil</p>	        
+			                </div>
+		                </a>
 		              </div>
 		            </div>	
 		            
 		            <div class="col-md-3">
 		              <div class="card mb-4 box-shadow">
-		                <img class="card-img-top" src="img/bye.jpg" alt="Card image cap">
-		                <div class="card-body">
-		                  <p class="card-text text-center"> <a href="app?action=logout" class="btn button">Logout</a> </p>	        
-		                </div>
+		              	<a href="app?action=logout" class="font-white">
+			                <img class="card-img-top" src="img/bye.jpg" alt="Card image cap">
+			                <div class="card-body">
+			                  <p class="card-text text-center">Logout</p>	        
+			                </div>
+		                </a>
 		              </div>
 		            </div>		
 		
