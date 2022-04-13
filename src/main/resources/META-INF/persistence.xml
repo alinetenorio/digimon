@@ -14,12 +14,12 @@
     	<exclude-unlisted-classes>false</exclude-unlisted-classes>
         
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/digimon?useTimezone=true&amp;serverTimezone=UTC" />
-            <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="root" />
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgres://ec2-18-214-134-226.compute-1.amazonaws.com:5432/dal2ccubsnt2e" />
+            <property name="javax.persistence.jdbc.user" value="zuswkfzwfoigja" />
+            <property name="javax.persistence.jdbc.password" value="9b3fb222777d5c3dd993c112c7724ddb5caa6ebd64dab44c4dd63ea654d6c962" />
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.show_sql" value="true" />
