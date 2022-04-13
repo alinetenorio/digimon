@@ -16,7 +16,6 @@ public class DigimonDAO {
 	
 	public Digimon find(int id) {
 		Digimon digimon = this.entityManager.find(Digimon.class, id);		
-		//Connection.closeConnection();
 		
         return digimon;
 	}

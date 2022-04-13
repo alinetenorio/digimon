@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -15,7 +14,6 @@ import jakarta.servlet.http.HttpSession;
 
 
 public class AuthenticationFilter implements Filter {
-	private ServletContext context;
 
     public void init() throws ServletException {
     	
@@ -31,12 +29,8 @@ public class AuthenticationFilter implements Filter {
         HttpSession session = request.getSession(false);
 
         if (session == null) { 
-        	System.out.println("null request.getContextPath()" + request.getContextPath());
             response.sendRedirect(request.getContextPath() + "/login.html");
-        } else {
-            // pass the request along the filter chain
-        	System.out.println("not null request.getContextPath()" + request.getContextPath());
-            
+        } else {            
         	chain.doFilter(request, response);
         }
     }

@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,19 +8,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.actions.Command;
-import model.actions.SignUpCommand;
 import model.actions.player.DeleteAccountCommand;
-import model.actions.player.EditPlayerPostCommand;
 import model.actions.team.CreateTeamCommand;
 import model.actions.team.EditTeamGetCommand;
 import model.actions.team.EditTeamPostCommand;
 import model.actions.team.SelectTeamGetCommand;
 import model.actions.team.SelectTeamPostCommand;
-import model.entity.Player;
 
 @WebServlet("/TeamServlet")
 public class TeamServlet extends HttpServlet {
-  //private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
   public TeamServlet() {
     super();

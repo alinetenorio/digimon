@@ -9,7 +9,9 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TeamDigimonKey implements Serializable {
 
-    @Column(name = "team_id")
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "team_id")
     private int teamId;
 
     @Column(name = "digimon_id")

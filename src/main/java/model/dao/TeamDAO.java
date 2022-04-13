@@ -6,10 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import org.hibernate.Session;
-
 import model.entity.Digimon;
-import model.entity.Player;
 import model.entity.Team;
 import model.entity.TeamDigimon;
 import model.entity.TeamDigimonKey;
@@ -23,7 +20,6 @@ public class TeamDAO {
 	
 	public Team find(int id) {
 		Team team = this.entityManager.find(Team.class, id);		
-		//Connection.closeConnection();
 		
 		return team;
 	}
@@ -32,7 +28,6 @@ public class TeamDAO {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.persist(team);
 		this.entityManager.getTransaction().commit();
-		//Connection.closeConnection();
 		return team;
 	}
 	
@@ -41,7 +36,6 @@ public class TeamDAO {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.remove(team);
 		this.entityManager.getTransaction().commit();
-		//Connection.closeConnection();
 	}
 	
 	public Team edit(int id, String name) {
@@ -71,9 +65,7 @@ public class TeamDAO {
 		} catch (NoResultException e) {
 			e.printStackTrace();
 			this.entityManager.getTransaction().rollback();
-		} finally {
-			//Connection.closeConnection();
-		}
+		} 
         
 	}
 	
@@ -84,7 +76,6 @@ public class TeamDAO {
 				this.entityManager.getTransaction().begin();
 				this.entityManager.persist(teamDigimon);								
 				this.entityManager.getTransaction().commit();
-				//Connection.closeConnection();
 			} catch (Exception e) {
 				e.printStackTrace();
 				this.entityManager.getTransaction().rollback();
@@ -92,8 +83,6 @@ public class TeamDAO {
 		} catch (NoResultException e) {
 			e.printStackTrace();
 			this.entityManager.getTransaction().rollback();
-		} finally {
-			//Connection.closeConnection();
 		}
         
 	}

@@ -82,7 +82,7 @@
 		
 				</div>			
 	      	</div>
-		
+		</div>
 		
 		<script src="//code.jquery.com/jquery.min.js"></script>
 		<script>

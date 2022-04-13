@@ -15,7 +15,6 @@ import model.entity.Team;
 public class TeamService {
 	private TeamDAO teamDAO = new TeamDAO();
 	private DigimonDAO digimonDAO = new DigimonDAO();
-	private PlayerDAO playerDAO = new PlayerDAO();
 	
 	public Team createTeam(String name, Player player, List<Integer> digimonsIds) {	
 		

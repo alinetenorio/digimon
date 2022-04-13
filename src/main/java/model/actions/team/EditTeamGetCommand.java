@@ -1,8 +1,6 @@
 package model.actions.team;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +10,6 @@ import model.dao.DigimonDAO;
 import model.dao.PlayerDAO;
 import model.dao.TeamDAO;
 import model.entity.Digimon;
-import model.entity.Player;
 import model.entity.TeamDigimon;
 
 public class EditTeamGetCommand implements Command {

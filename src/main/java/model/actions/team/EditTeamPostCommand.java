@@ -1,17 +1,13 @@
 package model.actions.team;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.actions.Command;
-import model.dao.DigimonDAO;
 import model.dao.PlayerDAO;
 import model.dao.TeamDAO;
-import model.entity.Digimon;
 import model.entity.Player;
 import model.entity.Team;
 import model.service.TeamService;
@@ -45,7 +41,7 @@ public class EditTeamPostCommand implements Command {
 			
 			try {
 				Team team = teamDAO.edit(teamId, teamName);
-				System.out.println("=== " + digimonsList.size());
+				
 				if(digimonsList.size() > 0)
 					teamService.setDigimons(team, digimonsList);
 				request.setAttribute("team", team);

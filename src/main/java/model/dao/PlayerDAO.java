@@ -4,7 +4,6 @@ import database.Connection;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import model.entity.Player;
 
@@ -17,7 +16,6 @@ public class PlayerDAO {
 	
 	public Player find(int id) {
 		Player player = this.entityManager.find(Player.class, id);		
-		//Connection.closeConnection();
 		
         return player;
 	}
@@ -53,7 +51,6 @@ public class PlayerDAO {
 			this.entityManager.persist(player);
 			this.entityManager.getTransaction().commit();
 			return player;
-			//Connection.closeConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 			this.entityManager.getTransaction().rollback();
@@ -66,7 +63,6 @@ public class PlayerDAO {
 		this.entityManager.getTransaction().begin();
 		this.entityManager.remove(player);
 		this.entityManager.getTransaction().commit();
-		//Connection.closeConnection();
 	}
 	
 	public Player edit(int id, String name, String email, String password) {

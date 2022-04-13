@@ -27,7 +27,7 @@
 				
 		<div class="album py-5 bg-light bg-transparent">
 	        <div class="container">
-				<h2>Time: <%= team.getName() %></h2></br>
+				<h2>Time: <%= team.getName() %></h2>
 				<h2>Escolha um Digimon do seu time para jogar:</h2>
 	        	<div class="row">
 		<%
@@ -36,7 +36,7 @@
 					<div class="col-md-4">
 		              <div class="card mb-4 box-shadow">
 		              	<a href="logged/play.jsp?selected-digimon=<%= digimon.getId() %>">	            
-			                <img class="card-img-top" src="<%= digimon.getImage() %>" alt="Card image cap">
+			                <img class="card-img-top" src="<%= digimon.getImage() %>" alt="Card image cap"/>
 			                <div class="card-body">
 			                  <p class="card-text text-center"> <%= digimon.getName() %> </p>	        
 			                </div>
